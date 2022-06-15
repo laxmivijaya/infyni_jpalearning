@@ -45,8 +45,19 @@ public class EmployeeController {
 
 
 
+    @GetMapping("/name/{empName}")
+    public ResponseEntity<Employee> getEmployeeData(@PathVariable("empName") String  empName) {
+        return new ResponseEntity<>(employeeService.getEmployeeData(empName),
+                HttpStatus.OK);
+    }
 
 
-
+    @GetMapping("/ageRange")
+    public ResponseEntity<List<Employee>> getEmployeeDataBasedOnRange(
+            @RequestParam("ageLimit1") Integer ageLimit1,
+                                                    @RequestParam("ageLimit2") Integer ageLimit2) {
+        return new ResponseEntity<>(employeeService.getEmployeeDataBasedOnRange(ageLimit1,ageLimit2),
+                HttpStatus.OK);
+    }
 
 }

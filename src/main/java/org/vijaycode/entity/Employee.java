@@ -16,19 +16,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Employee {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
     @SequenceGenerator(name = "employee_seq", allocationSize = 103, initialValue = 100, sequenceName = "employee_seq_name")
-
    /* @GeneratedValue(strategy = GenerationType.AUTO)*/
-
    /* @GeneratedValue(strategy = GenerationType.IDENTITY)*/
-
-
-
-
     private Integer empId;
+    @Column(unique = true)
     private String firstName;
     private String lastName;
     private Integer age;
@@ -36,5 +30,5 @@ public class Employee {
     private Double salary;
     private String email;
     private Long contact;
-
+    private boolean isActive;
 }

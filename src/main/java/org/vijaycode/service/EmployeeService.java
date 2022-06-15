@@ -28,4 +28,12 @@ public class EmployeeService {
     public void deleteEmployee(Integer employeeId) {
         employeeRepo.deleteById(employeeId);
     }
+
+    public Employee getEmployeeData(String empName) {
+        return employeeRepo.findByFirstName(empName);
+    }
+
+    public List<Employee> getEmployeeDataBasedOnRange(Integer ageLimit1, Integer ageLimit2) {
+        return employeeRepo.findByAgeBetween(ageLimit1,ageLimit2);
+    }
 }

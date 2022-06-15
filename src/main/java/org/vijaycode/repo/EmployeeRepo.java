@@ -3,7 +3,56 @@ package org.vijaycode.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.vijaycode.entity.Employee;
 
+import java.util.List;
+
 public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
+    Employee findByFirstName(String empName);
+    Employee findByFirstNameIs(String empName);
+    Employee findByFirstNameEquals(String empName);
+    //if we are using And  that time both condition must satisfy otherwise data will not get
+    Employee findByFirstNameAndLastName(String firstName,String lastName);
+
+    //if we are using And  that any condition  satisfy otherwise data will not get
+    List<Employee> findByFirstNameOrLastName(String firstName,String lastName);
+    List<Employee> findByFirstNameAndLastNameOrAge(String firstName,String lastName,Integer age);
+    List<Employee> findByAgeGreaterThan(Integer age);
+    List<Employee> findByAgeLessThan(Integer age);
+    List<Employee> findByAgeLessThanEqual(Integer age);
+    List<Employee> findByAgeBetween(Integer ageLimit1,Integer ageLimit2);
+
+    List<Employee> findByFirstNameStartingWith(Character startingCharacters);
+
+    List<Employee> findByFirstNameEndingWith(Character startingCharacters);
+
+    List<Employee> findByFirstNameEndingWithIgnoreCase(Character startingCharacters);
+
+    List<Employee> findByFirstNameContaining(Character startingCharacters);
+
+    List<Employee> findAllByAgeOrderByFirstNameDesc(Integer age);
+
+    List<Employee> findByAgeOrderByFirstNameDesc(Integer age);
+
+    List<Employee> findByIsActiveTrue();
+
+    List<Employee> findByIsActiveFalse();
+
+    List<Employee> findByIsActive(boolean isActive);
+
+
+    //Not,In,NotIn,True,False,IgnoreCase,Like,NotLike,After,Before,Is,Equals,Between,LessThan,GreaterThan,LessThanEqual,GreaterThanEqual,Containing
+    //orderBy,endingWith,StartingWith,And,Or
+
+
+
+
+
+
+
+
+
+
+
+    //findBy<Property_Name_defined_IN_Entity_CAMELCASE>(<Value of input>)
 
     //1.save(entity)--> uses for creation and updation
     //creation mode when we are not sending primary key in request that time JPA will consider as create.(specify the generation type)(depend on situation)
