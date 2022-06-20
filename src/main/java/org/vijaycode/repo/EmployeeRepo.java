@@ -1,6 +1,9 @@
 package org.vijaycode.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.vijaycode.entity.Employee;
 
 import java.util.List;
@@ -42,6 +45,28 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
     //Not,In,NotIn,True,False,IgnoreCase,Like,NotLike,After,Before,Is,Equals,Between,LessThan,GreaterThan,LessThanEqual,GreaterThanEqual,Containing
     //orderBy,endingWith,StartingWith,And,Or
 
+
+    @Query(name = "SELECT * FROM employee",nativeQuery = true)
+    List<Employee> getEmployeeData();
+
+
+    List<String> findFirstNameTop5ByEmpIdOrderByEmpIdAsc(Integer empId);
+
+
+    //ny join query(dummy)
+    @Query(name = "SELECT tbl1.column1,tbl1.colum2,tbl2.colum3,tbl2.column4 FROM Tbale tbl1, Tbale tbl2 where tbl1.empId=tbl2.empId",
+            nativeQuery = true)
+    List<Object[]> getEmployeeData1();
+
+
+    @Modifying
+    @Query(name = "update employee set first_name=? where empId=?",nativeQuery = true)
+    List<Employee> updatingRecord(String firstName,Integer empId);
+
+
+    @Modifying
+    @Query(name = "update employee set first_name=:firstName where empId=:empId",nativeQuery = true)
+    List<Employee> updatingRecord1(@Param("firstName") String firstName,@Param("empId")Integer empId);
 
 
 
